@@ -5,9 +5,9 @@ info:
   version: 0.1.9
 
 servers:
-  - url: http://localhost:4000/api/v1
+  - url: http://localhost:4000/api/v1/
     description: localhost version of our app
-  - url: https://localhost:4000/api/v1
+  - url: https://localhost:4000/api/v1/
     description: This is just a dummy api url it doesn't work Or -> Optional server description, e.g. Internal staging server for testing
 
 components:
@@ -19,11 +19,70 @@ components:
       type: http
       scheme: bearer
 
+paths:
+  /instagram:
+    get:
+       summary: returns username,followers and follows
+       responses: 
+         "200": # status code
+            description: return an object
+            content:
+              applications/json:
+                schema:
+                  type: object
+                  properties:
+                    username:
+                      type: string
+                    followers:
+                      type: string  
+                    follows:
+                      type: string 
+    post:
+       summary: returns username,followers and follows
+       responses: 
+         "200": # status code
+            description: return an object
+            content:
+              applications/json:
+                schema:
+                  type: object
+                  properties:
+                    username:
+                      type: string
+                    followers:
+                      type: string  
+                    follows:
+                      type: string 
+  /{token}:           
+    post:
+       summary: returns whatever is there in parameters
+       parameters:
+        - name: token
+          default: 5
+          in: path #As per documentations
+          schema:
+          type: string
+       responses: 
+         "200": # status code
+            description: return an object
+            content:
+              applications/json:
+                schema:
+                  type: object
+                  properties:
+                    params:
+                      type: string
+                   
+
+# shortcut key: shift+alt+navigating arrow for copy and navigate 2nd ctrl+alt+navigating to open side window               
 # Ref: https://swagger.io/docs/specification/basic-structure/
 # it's strict rule we should aware of that
 # that we don't have to do typo here otherwise it   will mess here & document won't be work here. so stay causious about that.
 
 # The guideline for the writing the documentations either come from seniors you dicide for yourself.
 
-#(👋➡️♦️talkAbout:components) sometimes you need a authentication as well when somebuddy logs in i want to store his cookies session id may be bearer token or something api specifaction know this all kind of stuff the common operation so they support 
-#(👋➡️♦️talkAbout:paths and operations)https://swagger.io/docs/specification/paths-and-operations/ 
+#(👋➡️♦️talkAbout:components) watch 3p(part)-3(section) sometimes you need a authentication as well when somebuddy logs in i want to store his cookies session id may be bearer token or something api specifaction know this all kind of stuff the common operation so they support 
+#(👋➡️♦️talkAbout:paths and operations) watch 3p(part)-4(section) in this process we'r gonna see how we can further define our works can write routes and parameter and what is expected in request while send & what is expected as a responce for this if you go here 👋🔗https://swagger.io/docs/specification/paths-and-operations/ explore path section, and each of the pathe you get get,put,post,delete request visit that, then further take a look on path Templeting->in case you expecting something in you'r parameter like token,id. there futhermore you can also request in querry string like /? like that. one more good thing that is obiviously is nessosory for documentation that is Deprecated operation in case some of the routes that are no londer available you'still have to mention over there some old people might be using there or old adopter of your system using may be.
+
+#after paths theory 
+
